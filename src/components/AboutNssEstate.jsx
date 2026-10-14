@@ -15,7 +15,7 @@ const AboutNssEstate = () => {
           <div className="lg:col-span-5 relative group">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#e8ded3] group-hover:border-[#c5a880] transition-all duration-500">
               <img
-                src="/images/about-nss-estate.jpg"
+                src={`${import.meta.env.BASE_URL}images/about-nss-estate.jpg`}
                 alt="NSS Estate Corporate Headquarters"
                 className="w-full h-[420px] sm:h-[500px] lg:h-[560px] object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
                 loading="lazy"

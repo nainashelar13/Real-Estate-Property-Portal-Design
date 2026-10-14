@@ -118,7 +118,7 @@ const Hero = () => {
         playsInline
         className="absolute inset-0 w-full h-full object-cover scale-105"
       >
-        <source src="/hero-video.mp4" type="video/mp4" />
+        <source src={`${import.meta.env.BASE_URL}hero-video.mp4`} type="video/mp4" />
         Your browser does not support HTML5 video.
       </video>
 

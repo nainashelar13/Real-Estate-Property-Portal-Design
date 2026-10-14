@@ -5,22 +5,22 @@ const stateData = [
   {
     id: 'maharashtra',
     name: 'Maharashtra',
-    image: '/images/states/maharashtra.jpg',
+    image: `${import.meta.env.BASE_URL}images/states/maharashtra.jpg`,
   },
   {
     id: 'goa',
     name: 'Goa',
-    image: '/images/states/goa.jpg',
+    image: `${import.meta.env.BASE_URL}images/states/goa.jpg`,
   },
   {
     id: 'gujarat',
     name: 'Gujarat',
-    image: '/images/states/gujarat.jpg',
+    image: `${import.meta.env.BASE_URL}images/states/gujarat.jpg`,
   },
   {
     id: 'karnataka',
     name: 'Karnataka',
-    image: '/images/states/karnataka.jpg',
+    image: `${import.meta.env.BASE_URL}images/states/karnataka.jpg`,
   },
 ];
 
