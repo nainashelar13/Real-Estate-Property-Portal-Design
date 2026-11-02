@@ -1,36 +1,17 @@
 import React, { useState } from 'react';
 import { FiArrowUpRight, FiSearch, FiX } from 'react-icons/fi';
+import { statesData } from '../data/regionsData';
 
-const stateData = [
-  {
-    id: 'maharashtra',
-    name: 'Maharashtra',
-    image: `${import.meta.env.BASE_URL}images/states/maharashtra.jpg`,
-  },
-  {
-    id: 'goa',
-    name: 'Goa',
-    image: `${import.meta.env.BASE_URL}images/states/goa.jpg`,
-  },
-  {
-    id: 'gujarat',
-    name: 'Gujarat',
-    image: `${import.meta.env.BASE_URL}images/states/gujarat.jpg`,
-  },
-  {
-    id: 'karnataka',
-    name: 'Karnataka',
-    image: `${import.meta.env.BASE_URL}images/states/karnataka.jpg`,
-  },
-];
-
-const StateCards = () => {
+const StateCards = ({ onSelectState }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredStates = stateData.filter((state) => {
+  const filteredStates = statesData.filter((state) => {
     const query = searchQuery.toLowerCase().trim();
     if (!query) return true;
-    return state.name.toLowerCase().includes(query);
+    return (
+      state.name.toLowerCase().includes(query) ||
+      state.cities.some((c) => c.name.toLowerCase().includes(query))
+    );
   });
 
   const handleSearchSubmit = (e) => {
@@ -84,7 +65,7 @@ const StateCards = () => {
               {searchQuery && (
                 <button
                   type="button"
-                  onClick={() => setSearchQuery('')}
+                  onClick={handleClear}
                   className="text-gray-400 hover:text-gray-600 p-1 mr-1"
                 >
                   <FiX size={14} />
@@ -102,12 +83,13 @@ const StateCards = () => {
 
         </div>
 
-        {/* ── Minimalist Clean State Cards (Only State Name & Explore Button) ── */}
+        {/* ── Minimalist Clean State Cards (Click opens city cards page) ── */}
         {filteredStates.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {filteredStates.map((state) => (
               <div
                 key={state.id}
+                onClick={() => onSelectState && onSelectState(state.id)}
                 className="group relative bg-white rounded-2xl overflow-hidden border border-[#e8ded3] hover:border-[#c5a880] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#c5a880]/15 flex flex-col justify-between cursor-pointer transform hover:-translate-y-1.5"
               >
                 
@@ -127,12 +109,21 @@ const StateCards = () => {
                       {state.name}
                     </h3>
                   </div>
+
+                  {/* Cities count badge on top right */}
+                  <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 text-[#c5a880] text-[10px] font-bold">
+                    {state.cities.length} Cities
+                  </div>
                 </div>
 
                 {/* Card Body: ONLY Explore Button */}
                 <div className="p-3.5 sm:p-4 bg-white">
                   <button
                     type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (onSelectState) onSelectState(state.id);
+                    }}
                     className="w-full bg-[#1f1916] hover:bg-gradient-to-r hover:from-[#b89563] hover:via-[#c5a880] hover:to-[#b89563] text-white hover:text-[#1a1412] font-extrabold text-xs uppercase tracking-widest py-2.5 px-4 rounded-xl border border-transparent transition-all duration-300 flex items-center justify-center gap-2 shadow-xs cursor-pointer"
                   >
                     <span>Explore {state.name}</span>

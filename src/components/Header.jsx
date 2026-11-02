@@ -2,7 +2,7 @@ import React from 'react';
 import TopBar from './TopBar';
 import { FiSearch, FiPhone, FiUser } from 'react-icons/fi';
 
-const Header = () => {
+const Header = ({ onNavigateHome }) => {
     return (
         <header className="w-full shadow-lg">
             {/* Upar wali top patti */}
@@ -12,7 +12,10 @@ const Header = () => {
             <div className="bg-[#1f1916] text-white py-3.5 px-4 md:px-8 flex justify-between items-center border-b border-white/10">
 
                 {/* Logo Section */}
-                <div className="flex items-center gap-2">
+                <div
+                    onClick={onNavigateHome}
+                    className="flex items-center gap-2 cursor-pointer transition-transform hover:scale-105"
+                >
                     <div className="font-extrabold text-2xl tracking-widest text-white flex items-center">
                         <span className="text-[#c5a880] mr-2">NSS</span>ESTATE
                     </div>
@@ -20,16 +23,29 @@ const Header = () => {
 
                 {/* Navigation Links - Lodha luxury uppercase tracking */}
                 <nav className="hidden md:flex items-center gap-8 font-medium text-xs md:text-sm tracking-widest uppercase text-gray-200">
-                    <a href="#" className="text-white border-b-2 border-[#c5a880] pb-1 font-semibold">
+                    <a
+                        href="#"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            if (onNavigateHome) onNavigateHome();
+                        }}
+                        className="text-white border-b-2 border-[#c5a880] pb-1 font-semibold cursor-pointer"
+                    >
                         Home
                     </a>
-                    <a href="#" className="hover:text-[#c5a880] transition-colors">
+                    <a
+                        href="#regions"
+                        onClick={() => {
+                            if (onNavigateHome) onNavigateHome();
+                        }}
+                        className="hover:text-[#c5a880] transition-colors"
+                    >
                         Smart Search
                     </a>
-                    <a href="#" className="hover:text-[#c5a880] transition-colors">
+                    <a href="#about-nss" className="hover:text-[#c5a880] transition-colors">
                         About Us
                     </a>
-                    <a href="#" className="hover:text-[#c5a880] transition-colors">
+                    <a href="#footer" className="hover:text-[#c5a880] transition-colors">
                         Contact Us
                     </a>
                 </nav>

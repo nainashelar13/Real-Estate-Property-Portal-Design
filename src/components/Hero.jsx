@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { FiSearch, FiCheck } from 'react-icons/fi';
+import { statesData, getCitiesForState, getStateByName } from '../data/regionsData';
 
 // Pill / Airbnb Segment Component with Luxury Theme
 const PillSegment = ({ label, value, placeholder, options, onChange, isOpen, onToggle, onClose }) => {
@@ -76,7 +77,7 @@ const PillSegment = ({ label, value, placeholder, options, onChange, isOpen, onT
   );
 };
 
-const Hero = () => {
+const Hero = ({ onSelectState }) => {
   const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [propertyType, setPropertyType] = useState('');
@@ -85,19 +86,49 @@ const Hero = () => {
   // Dropdown open states
   const [openDropdown, setOpenDropdown] = useState(null);
 
-  const states = ['Maharashtra', 'Goa', 'Gujarat', 'Karnataka'];
-  const cities = ['Pune', 'Kolhapur', 'Nashik', 'Nagpur', 'Sangli', 'Satara', 'Aurangabad'];
+  // States list from our master dataset
+  const states = useMemo(() => statesData.map((s) => s.name), []);
+
+  // Cities dynamically filtered according to the selected state!
+  const availableCities = useMemo(() => {
+    return getCitiesForState(selectedState);
+  }, [selectedState]);
+
   const propertyTypes = ['Apartment / Flat', 'Villa / Row House', 'Independent House', 'Plot / Land', 'Commercial Property'];
   const configurations = ['1 RK / 1 BHK', '2 BHK', '3 BHK', '4 BHK', '5+ BHK / Penthouse'];
   
   const popularTags = [
     'Prime Location',
-    'Spacious Homes',
+    'Sea View Villas',
     'IT Hub Connectivity',
-    'High Footfall',
-    'Modern Lifestyle',
-    'Commercial Property',
+    'Luxury Penthouse',
+    'Private Pool',
+    'Gated Community',
   ];
+
+  // When State is chosen, reset City if it doesn't belong to the newly selected state
+  const handleStateChange = (stateName) => {
+    setSelectedState(stateName);
+    if (stateName) {
+      const validCities = getCitiesForState(stateName);
+      if (!validCities.includes(selectedCity)) {
+        setSelectedCity('');
+      }
+    }
+  };
+
+  // When City is chosen, if no state was chosen, automatically detect and select its state
+  const handleCityChange = (cityName) => {
+    setSelectedCity(cityName);
+    if (cityName && !selectedState) {
+      const parentState = statesData.find((s) =>
+        s.cities.some((c) => c.name.toLowerCase() === cityName.toLowerCase())
+      );
+      if (parentState) {
+        setSelectedState(parentState.name);
+      }
+    }
+  };
 
   const toggleDropdown = (name) => {
     setOpenDropdown((prev) => (prev === name ? null : name));
@@ -105,6 +136,27 @@ const Hero = () => {
 
   const closeDropdown = () => {
     setOpenDropdown(null);
+  };
+
+  // Search handler that navigates to the selected state and city
+  const handleSearch = () => {
+    let targetStateId = null;
+    if (selectedState) {
+      const stateObj = getStateByName(selectedState);
+      if (stateObj) targetStateId = stateObj.id;
+    } else if (selectedCity) {
+      const parentState = statesData.find((s) =>
+        s.cities.some((c) => c.name.toLowerCase() === selectedCity.toLowerCase())
+      );
+      if (parentState) targetStateId = parentState.id;
+    }
+
+    if (targetStateId && onSelectState) {
+      onSelectState(targetStateId, selectedCity, propertyType, configuration);
+    } else {
+      const el = document.getElementById('regions');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -144,34 +196,34 @@ const Hero = () => {
 
         {/* Subtitle */}
         <p className="text-[#ded6ce] text-xs sm:text-sm max-w-xl mx-auto leading-relaxed mb-6 font-normal drop-shadow">
-          Explore 2,500+ verified properties across Kolhapur, Sangli, Pune &amp; more. Connect directly with top builders — zero brokerage.
+          Explore curated luxury residences, coastal villas, and penthouses across Maharashtra, Goa, Gujarat &amp; Karnataka. Connect directly with top builders — zero brokerage.
         </p>
 
-        {/* ── 4. Luxury Pill / Airbnb Single Pill Row Card (Theme-Matched Colors) ── */}
+        {/* ── 4. Luxury Pill / Airbnb Single Pill Row Card ── */}
         <div className="relative bg-white/95 backdrop-blur-md rounded-3xl p-4 sm:p-5 shadow-2xl max-w-4xl mx-auto border border-[#c5a880]/40 text-left shadow-[0_20px_50px_rgba(26,20,18,0.25)]">
           
           {/* The Single Pill Row */}
           <div className="bg-[#faf8f5] rounded-full border border-[#e5dcd1] hover:border-[#c5a880] shadow-sm hover:shadow-md transition-all flex items-center p-1 sm:p-1.5 pl-2 sm:pl-3 pr-2 divide-x divide-[#e8ded3]">
             
-            {/* STATE */}
+            {/* STATE (Dynamic States) */}
             <PillSegment
               label="STATE"
               value={selectedState}
               placeholder="Where?"
               options={states}
-              onChange={setSelectedState}
+              onChange={handleStateChange}
               isOpen={openDropdown === 'state'}
               onToggle={() => toggleDropdown('state')}
               onClose={closeDropdown}
             />
 
-            {/* CITY */}
+            {/* CITY (Strictly filtered according to selected STATE) */}
             <PillSegment
               label="CITY"
               value={selectedCity}
-              placeholder="Any City"
-              options={cities}
-              onChange={setSelectedCity}
+              placeholder={selectedState ? `Any City in ${selectedState}` : 'Any City'}
+              options={availableCities}
+              onChange={handleCityChange}
               isOpen={openDropdown === 'city'}
               onToggle={() => toggleDropdown('city')}
               onClose={closeDropdown}
@@ -205,6 +257,7 @@ const Hero = () => {
             <div className="pl-2 sm:pl-3 pr-1 shrink-0">
               <button
                 type="button"
+                onClick={handleSearch}
                 className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#c5a880] hover:bg-[#b5976f] text-[#1f1916] flex items-center justify-center shadow-md hover:shadow-lg hover:shadow-[#c5a880]/40 transition-all cursor-pointer transform hover:scale-105 active:scale-95"
                 title="Search Properties"
               >
@@ -214,13 +267,17 @@ const Hero = () => {
 
           </div>
 
-          {/* Popular Filter Tags Row (Warm Gold & Espresso Theme) */}
+          {/* Popular Filter Tags Row */}
           <div className="flex flex-wrap items-center gap-2 mt-4 px-2">
             <span className="text-[11px] font-extrabold text-[#8c6d46] uppercase tracking-wider mr-1">Popular:</span>
             {popularTags.map((tag) => (
               <button
                 key={tag}
                 type="button"
+                onClick={() => {
+                  const el = document.getElementById('regions');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
                 className="text-xs px-3.5 py-1.5 rounded-full bg-[#f4ede3] hover:bg-[#c5a880] text-[#3d3129] hover:text-[#1a1412] border border-[#e2d6c6] hover:border-[#c5a880] font-semibold transition-all cursor-pointer shadow-xs hover:shadow-sm"
               >
                 {tag}
@@ -237,8 +294,8 @@ const Hero = () => {
             <div className="text-[10px] text-[#cfc5ba] uppercase tracking-widest mt-0.5 font-medium">Verified Builders</div>
           </div>
           <div className="px-3">
-            <div className="text-xl sm:text-2xl font-extrabold text-[#c5a880]">14+</div>
-            <div className="text-[10px] text-[#cfc5ba] uppercase tracking-widest mt-0.5 font-medium">Cities Covered</div>
+            <div className="text-xl sm:text-2xl font-extrabold text-[#c5a880]">26+</div>
+            <div className="text-[10px] text-[#cfc5ba] uppercase tracking-widest mt-0.5 font-medium">Cities Across India</div>
           </div>
           <div className="px-3">
             <div className="text-xl sm:text-2xl font-extrabold text-white">2,500+</div>
