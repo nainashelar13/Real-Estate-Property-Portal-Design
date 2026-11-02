@@ -1,13 +1,13 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { 
-  FiArrowLeft, 
-  FiArrowUpRight, 
-  FiSearch, 
-  FiX, 
-  FiMapPin, 
-  FiTrendingUp, 
-  FiHome, 
-  FiCheckCircle, 
+import {
+  FiArrowLeft,
+  FiArrowUpRight,
+  FiSearch,
+  FiX,
+  FiMapPin,
+  FiTrendingUp,
+  FiHome,
+  FiCheckCircle,
   FiPhone,
   FiGrid,
   FiFilter,
@@ -22,7 +22,7 @@ const CityCardsView = ({ stateId, initialCity = '', initialType = '', initialBhk
   const [selectedCityFilter, setSelectedCityFilter] = useState(initialCity || '');
   const [selectedBhkFilter, setSelectedBhkFilter] = useState(initialBhk || '');
   const [selectedTypeFilter, setSelectedTypeFilter] = useState(initialType || '');
-  
+
   // Modal for individual property / city consultation
   const [selectedItemModal, setSelectedItemModal] = useState(null);
   const [inquirySuccess, setInquirySuccess] = useState(false);
@@ -80,7 +80,7 @@ const CityCardsView = ({ stateId, initialCity = '', initialType = '', initialBhk
 
     const query = searchQuery.toLowerCase().trim();
     if (query) {
-      list = list.filter((p) => 
+      list = list.filter((p) =>
         p.name.toLowerCase().includes(query) ||
         p.locality.toLowerCase().includes(query) ||
         p.city.toLowerCase().includes(query) ||
@@ -115,11 +115,11 @@ const CityCardsView = ({ stateId, initialCity = '', initialType = '', initialBhk
 
   return (
     <div className="bg-[#f8f6f2] min-h-screen">
-      
+
       {/* ── 1. Full-Width Edge-to-Edge Sleek Rectangle State Hero Banner (Compact Height) ── */}
       <div className="w-full relative overflow-hidden bg-[#1f1916] shadow-md">
         <div className="relative min-h-[250px] sm:min-h-[280px] lg:min-h-[300px] w-full flex flex-col justify-between overflow-hidden">
-          
+
           {/* Background Image */}
           <img
             src={currentState.image}
@@ -177,7 +177,7 @@ const CityCardsView = ({ stateId, initialCity = '', initialType = '', initialBhk
           {/* ── Main Banner Content (Bigger, Bold Luxury Typography) ── */}
           <div className="relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 my-auto">
             <div className="max-w-4xl">
-              
+
               {/* FIRST LINE: Explore Cities in [State] - Prominent Big Heading */}
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-3 drop-shadow-lg">
                 Explore Cities in{' '}
@@ -219,17 +219,16 @@ const CityCardsView = ({ stateId, initialCity = '', initialType = '', initialBhk
 
         {/* ── 4. Main View Selector Tabs (Cities vs Properties) ── */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6 bg-white p-2 sm:p-3 rounded-2xl border border-[#e8ded3] shadow-xs">
-          
+
           {/* View Mode Pills */}
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setActiveTab('cities')}
-              className={`px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-xs ${
-                activeTab === 'cities'
+              className={`px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-xs ${activeTab === 'cities'
                   ? 'bg-[#1f1916] text-[#c5a880] shadow-md'
                   : 'bg-[#faf8f5] text-[#5c4f46] hover:bg-[#ede4d7] hover:text-[#1f1916]'
-              }`}
+                }`}
             >
               <FiGrid size={14} />
               <span>Explore Cities ({currentState.cities.length})</span>
@@ -238,11 +237,10 @@ const CityCardsView = ({ stateId, initialCity = '', initialType = '', initialBhk
             <button
               type="button"
               onClick={() => setActiveTab('properties')}
-              className={`px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-xs ${
-                activeTab === 'properties'
+              className={`px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-xs ${activeTab === 'properties'
                   ? 'bg-[#1f1916] text-[#c5a880] shadow-md'
                   : 'bg-[#faf8f5] text-[#5c4f46] hover:bg-[#ede4d7] hover:text-[#1f1916]'
-              }`}
+                }`}
             >
               <FiHome size={14} />
               <span>
@@ -272,7 +270,7 @@ const CityCardsView = ({ stateId, initialCity = '', initialType = '', initialBhk
 
         {/* ── 5. Search & Filters Strip ── */}
         <div className="bg-white p-4 rounded-2xl border border-[#e8ded3] shadow-xs mb-8 space-y-3">
-          
+
           <div className="flex flex-col md:flex-row items-center gap-3">
             {/* Search Input */}
             <div className="relative w-full md:flex-1">
@@ -304,11 +302,10 @@ const CityCardsView = ({ stateId, initialCity = '', initialType = '', initialBhk
               <button
                 type="button"
                 onClick={() => setSelectedCityFilter('')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0 cursor-pointer ${
-                  !selectedCityFilter
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0 cursor-pointer ${!selectedCityFilter
                     ? 'bg-[#1f1916] text-[#c5a880]'
                     : 'bg-[#f4ede3] text-[#5c4f46] hover:bg-[#c5a880] hover:text-[#1f1916]'
-                }`}
+                  }`}
               >
                 All {currentState.name}
               </button>
@@ -319,11 +316,10 @@ const CityCardsView = ({ stateId, initialCity = '', initialType = '', initialBhk
                     key={c.id}
                     type="button"
                     onClick={() => setSelectedCityFilter(isSelected ? '' : c.name)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0 cursor-pointer ${
-                      isSelected
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all shrink-0 cursor-pointer ${isSelected
                         ? 'bg-[#1f1916] text-[#c5a880]'
                         : 'bg-[#f4ede3] text-[#5c4f46] hover:bg-[#c5a880] hover:text-[#1f1916]'
-                    }`}
+                      }`}
                   >
                     {c.name}
                   </button>
@@ -344,11 +340,10 @@ const CityCardsView = ({ stateId, initialCity = '', initialType = '', initialBhk
                   key={bhk || 'all'}
                   type="button"
                   onClick={() => setSelectedBhkFilter(bhk)}
-                  className={`text-[11px] px-2.5 py-1 rounded-md font-semibold transition-all cursor-pointer ${
-                    isSelected
+                  className={`text-[11px] px-2.5 py-1 rounded-md font-semibold transition-all cursor-pointer ${isSelected
                       ? 'bg-[#c5a880] text-[#1f1916] font-extrabold shadow-xs'
                       : 'bg-[#faf8f5] text-[#6e6259] hover:bg-[#ede4d7] hover:text-[#1f1916] border border-[#e8ded3]'
-                  }`}
+                    }`}
                 >
                   {bhk || 'All BHKs'}
                 </button>
@@ -371,338 +366,338 @@ const CityCardsView = ({ stateId, initialCity = '', initialType = '', initialBhk
             </div>
 
             {filteredCities.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                {filteredCities.map((city) => (
-                  <div
-                    key={city.id}
-                    onClick={() => handleCityClick(city.name)}
-                    className="group relative bg-white rounded-2xl overflow-hidden border border-[#e8ded3] hover:border-[#c5a880] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#c5a880]/15 flex flex-col justify-between cursor-pointer transform hover:-translate-y-1.5"
-                  >
-                    {/* City Architectural Image with City Name */}
-                    <div className="relative h-48 sm:h-52 w-full overflow-hidden">
-                      <img
-                        src={city.image}
-                        alt={city.name}
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        loading="lazy"
-                      />
-                      {/* Gradient Overlay for photo contrast */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
-
-                      {/* City Name ON the Image (Left Corner) */}
-                      <div className="absolute bottom-3 left-3.5 sm:left-4">
-                        <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight drop-shadow-lg group-hover:text-[#c5a880] transition-colors">
-                          {city.name}
-                        </h3>
-                      </div>
-
-                      {/* Properties Count Badge on Top Right */}
-                      <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 text-[#c5a880] text-[10px] font-bold">
-                        {city.propertiesCount}
-                      </div>
-                    </div>
-
-                    {/* Card Body: ONLY Explore Button (Exact same as State Cards) */}
-                    <div className="p-3.5 sm:p-4 bg-white">
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleCityClick(city.name);
-                        }}
-                        className="w-full bg-[#1f1916] hover:bg-gradient-to-r hover:from-[#b89563] hover:via-[#c5a880] hover:to-[#b89563] text-white hover:text-[#1a1412] font-extrabold text-xs uppercase tracking-widest py-2.5 px-4 rounded-xl border border-transparent transition-all duration-300 flex items-center justify-center gap-2 shadow-xs cursor-pointer"
-                      >
-                        <span>Explore {city.name}</span>
-                        <FiArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                      </button>
-                    </div>
-
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="bg-white rounded-2xl border border-[#e8ded3] p-12 text-center max-w-md mx-auto shadow-sm my-6">
-                <div className="w-14 h-14 mx-auto rounded-full bg-[#f4ede3] flex items-center justify-center text-[#c5a880] mb-3">
-                  <FiSearch size={24} />
-                </div>
-                <h4 className="text-lg font-bold text-[#1f1916] mb-1">No Cities Found</h4>
-                <p className="text-xs text-gray-500 mb-4">
-                  We couldn't find any city matching "{searchQuery}".
-                </p>
-                <button
-                  type="button"
-                  onClick={clearAllFilters}
-                  className="bg-[#1f1916] hover:bg-[#c5a880] text-white hover:text-[#1a1412] px-5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer"
-                >
-                  Show All {currentState.name} Cities
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* ── 7. VIEW TAB 2: LIVE PROPERTIES IN STATE & CITY ── */}
-        {activeTab === 'properties' && (
-          <div>
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-              <div>
-                <h3 className="text-base sm:text-lg font-black text-[#1f1916]">
-                  {selectedCityFilter 
-                    ? `Curated Properties in ${selectedCityFilter}, ${currentState.name}`
-                    : `All Luxury Properties in ${currentState.name}`}
-                </h3>
-                <p className="text-xs text-[#6e6259]">
-                  Verified builder residences with direct concierge assistance.
-                </p>
-              </div>
-              
-              <span className="text-xs font-semibold text-[#8c6d46] bg-white px-3 py-1 rounded-lg border border-[#e8ded3]">
-                Showing {filteredProperties.length} Properties
-              </span>
-            </div>
-
-            {filteredProperties.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProperties.map((prop) => (
-                  <div
-                    key={prop.id}
-                    onClick={() => setSelectedItemModal(prop)}
-                    className="group bg-white rounded-2xl overflow-hidden border border-[#e8ded3] hover:border-[#c5a880] transition-all duration-300 shadow-sm hover:shadow-2xl hover:shadow-[#c5a880]/20 flex flex-col justify-between cursor-pointer transform hover:-translate-y-1.5"
-                  >
-                    {/* Property Image */}
-                    <div className="relative h-52 w-full overflow-hidden bg-gray-100">
-                      <img
-                        src={prop.image}
-                        alt={prop.name}
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-                      {/* Top Badges */}
-                      <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                        <span className="px-2.5 py-1 rounded-full bg-[#1f1916]/80 backdrop-blur-md text-[#c5a880] text-[10px] font-black uppercase tracking-wider border border-[#c5a880]/30">
-                          {prop.bhk}
-                        </span>
-
-                        <span className="px-2 py-0.5 rounded-md bg-green-900/90 backdrop-blur-sm text-green-200 text-[10px] font-bold uppercase tracking-wider border border-green-500/30">
-                          {prop.status}
-                        </span>
-                      </div>
-
-                      {/* Bottom Info on Image */}
-                      <div className="absolute bottom-3 left-3.5 right-3.5">
-                        <h4 className="text-xl font-black text-white tracking-tight drop-shadow-md group-hover:text-[#c5a880] transition-colors">
-                          {prop.name}
-                        </h4>
-                        <p className="text-[11px] text-gray-200 font-medium flex items-center gap-1 mt-0.5">
-                          <FiMapPin size={11} className="text-[#c5a880]" />
-                          <span>{prop.locality}, {prop.city}</span>
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Property Details Body */}
-                    <div className="p-4 flex-1 flex flex-col justify-between bg-white">
-                      
-                      <div className="mb-4">
-                        <div className="text-xs font-semibold text-[#52463e] mb-2">
-                          {prop.type}
-                        </div>
-
-                        {/* Price & Location Tag */}
-                        <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#f8f6f2] border border-[#eee6dc]">
-                          <div>
-                            <span className="text-[9px] uppercase tracking-wider text-[#9c8e82] font-bold block">
-                              Investment Price
-                            </span>
-                            <span className="text-sm font-extrabold text-[#1f1916]">
-                              {prop.price}
-                            </span>
-                          </div>
-
-                          <div className="text-right">
-                            <span className="text-[9px] uppercase tracking-wider text-[#9c8e82] font-bold block">
-                              Type
-                            </span>
-                            <span className="text-xs font-bold text-[#8c6d46]">
-                              {prop.propertyType}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Action Button */}
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedItemModal(prop);
-                        }}
-                        className="w-full bg-[#1f1916] hover:bg-[#c5a880] text-white hover:text-[#1a1412] font-bold text-xs uppercase tracking-wider py-2.5 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-xs"
-                      >
-                        <FiCalendar size={13} />
-                        <span>Book Site Visit &amp; Brochure</span>
-                      </button>
-
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="bg-white rounded-2xl border border-[#e8ded3] p-12 text-center max-w-md mx-auto shadow-sm my-6">
-                <div className="w-14 h-14 mx-auto rounded-full bg-[#f4ede3] flex items-center justify-center text-[#c5a880] mb-3">
-                  <FiSearch size={24} />
-                </div>
-                <h4 className="text-lg font-bold text-[#1f1916] mb-1">No Properties Found</h4>
-                <p className="text-xs text-gray-500 mb-4">
-                  No properties matched your current criteria in {currentState.name}.
-                </p>
-                <button
-                  type="button"
-                  onClick={clearAllFilters}
-                  className="bg-[#1f1916] hover:bg-[#c5a880] text-white hover:text-[#1a1412] px-5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer"
-                >
-                  Clear Filters &amp; View All
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-
-      </div>
-
-      {/* ── 8. Luxury Property / City Consultation Modal ── */}
-      {selectedItemModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div 
-            className="bg-white rounded-3xl overflow-hidden border border-[#c5a880]/40 max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl relative"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header with Image */}
-            <div className="relative h-48 sm:h-56 w-full shrink-0">
-              <img
-                src={selectedItemModal.image}
-                alt={selectedItemModal.name}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1f1916] via-[#1f1916]/60 to-black/30" />
-              
-              {/* Close Button */}
-              <button
-                type="button"
-                onClick={() => setSelectedItemModal(null)}
-                className="absolute top-4 right-4 bg-black/60 hover:bg-black text-white p-2 rounded-full backdrop-blur-md transition-colors cursor-pointer border border-white/20"
-              >
-                <FiX size={16} />
-              </button>
-
-              {/* Title on Banner */}
-              <div className="absolute bottom-4 left-5 right-5">
-                <span className="px-2.5 py-0.5 rounded-full bg-[#c5a880] text-[#1f1916] text-[10px] font-black uppercase tracking-wider mb-1.5 inline-block">
-                  {selectedItemModal.bhk || selectedItemModal.tag || 'Luxury Development'}
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                  {selectedItemModal.name}
-                </h3>
-                <p className="text-xs text-gray-200 font-medium flex items-center gap-1 mt-0.5">
-                  <FiMapPin size={11} className="text-[#c5a880]" />
-                  <span>
-                    {selectedItemModal.locality ? `${selectedItemModal.locality}, ${selectedItemModal.city}, ` : ''}
-                    {currentState.name}
-                  </span>
-                </p>
-              </div>
-            </div>
-
-            {/* Modal Scrollable Content */}
-            <div className="p-6 overflow-y-auto space-y-5">
-              
-              {/* Key Specs Strip */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3 rounded-xl bg-[#f8f6f2] border border-[#eee6dc]">
-                <div>
-                  <span className="text-[9px] uppercase tracking-wider text-[#9c8e82] font-bold block">Investment</span>
-                  <span className="text-sm font-black text-[#1f1916]">
-                    {selectedItemModal.price || selectedItemModal.avgPrice || 'Price on Request'}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-[9px] uppercase tracking-wider text-[#9c8e82] font-bold block">Configuration</span>
-                  <span className="text-xs font-bold text-[#8c6d46]">
-                    {selectedItemModal.bhk || selectedItemModal.propertiesCount || 'Signature Residences'}
-                  </span>
-                </div>
-                <div className="col-span-2 sm:col-span-1">
-                  <span className="text-[9px] uppercase tracking-wider text-[#9c8e82] font-bold block">Status</span>
-                  <span className="text-xs font-bold text-green-700">
-                    {selectedItemModal.status || 'Verified Listing'}
-                  </span>
-                </div>
-              </div>
-
-              {/* Instant Inquiry / Site Visit Form */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#1f1916] to-[#2c2420] text-white border border-[#c5a880]/30">
-                <div className="flex items-center justify-between mb-3">
-                  <div>
-                    <h5 className="text-sm font-black text-white">
-                      Book Private Site Visit &amp; Official Brochure
-                    </h5>
-                    <p className="text-[11px] text-gray-300">
-                      Connect directly with NSS Senior Investment Director in {currentState.name}
-                    </p>
-                  </div>
-                  <span className="hidden sm:inline-block px-2.5 py-1 rounded-full bg-[#c5a880]/20 border border-[#c5a880]/40 text-[#c5a880] text-[10px] font-bold uppercase">
-                    VIP Concierge
-                  </span>
-                </div>
-
-                {inquirySuccess ? (
-                  <div className="p-4 rounded-xl bg-[#c5a880]/20 border border-[#c5a880] text-center text-[#f8f6f2] flex items-center justify-center gap-2">
-                    <FiCheckCircle size={18} className="text-[#c5a880]" />
-                    <span className="text-xs font-bold">
-                      Thank you! Your private consultation request has been confirmed. Our director will call you shortly.
-                    </span>
-                  </div>
-                ) : (
-                  <form onSubmit={handleInquirySubmit} className="space-y-2.5">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      <input
-                        type="text"
-                        required
-                        placeholder="Your Full Name"
-                        value={inquiryForm.name}
-                        onChange={(e) => setInquiryForm({ ...inquiryForm, name: e.target.value })}
-                        className="bg-white/10 border border-white/20 focus:border-[#c5a880] rounded-xl px-3 py-2 text-xs text-white placeholder-gray-400 outline-none"
-                      />
-                      <input
-                        type="tel"
-                        required
-                        placeholder="Phone Number (e.g. 9876543210)"
-                        value={inquiryForm.phone}
-                        onChange={(e) => setInquiryForm({ ...inquiryForm, phone: e.target.value })}
-                        className="bg-white/10 border border-white/20 focus:border-[#c5a880] rounded-xl px-3 py-2 text-xs text-white placeholder-gray-400 outline-none"
-                      />
-                    </div>
-                    
-                    <button
-                      type="submit"
-                      className="w-full bg-gradient-to-r from-[#b89563] via-[#c5a880] to-[#b89563] hover:brightness-110 text-[#1a1412] font-black text-xs uppercase tracking-wider py-2.5 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                  {filteredCities.map((city) => (
+                    <div
+                      key={city.id}
+                      onClick={() => handleCityClick(city.name)}
+                      className="group relative bg-white rounded-2xl overflow-hidden border border-[#e8ded3] hover:border-[#c5a880] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#c5a880]/15 flex flex-col justify-between cursor-pointer transform hover:-translate-y-1.5"
                     >
-                      <FiPhone size={13} />
-                      <span>Request VIP Site Visit for {selectedItemModal.name}</span>
-                    </button>
-                  </form>
-                )}
-              </div>
+                        {/* City Architectural Image with City Name */}
+                        <div className="relative h-48 sm:h-52 w-full overflow-hidden">
+                          <img
+                            src={city.image}
+                            alt={city.name}
+                            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                            loading="lazy"
+                          />
+                          {/* Gradient Overlay for photo contrast */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
 
-            </div>
+                            {/* City Name ON the Image (Left Corner) */}
+                            <div className="absolute bottom-3 left-3.5 sm:left-4">
+                              <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight drop-shadow-lg group-hover:text-[#c5a880] transition-colors">
+                                {city.name}
+                              </h3>
+                            </div>
 
-          </div>
-        </div>
-      )}
+                              {/* Properties Count Badge on Top Right */}
+                              <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 text-[#c5a880] text-[10px] font-bold">
+                                {city.propertiesCount}
+                              </div>
+                            </div>
 
-    </div>
-  );
+                                {/* Card Body: ONLY Explore Button (Exact same as State Cards) */}
+                                <div className="p-3.5 sm:p-4 bg-white">
+                                  <button
+                                    type="button"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleCityClick(city.name);
+                                    }}
+                                    className="w-full bg-[#1f1916] hover:bg-gradient-to-r hover:from-[#b89563] hover:via-[#c5a880] hover:to-[#b89563] text-white hover:text-[#1a1412] font-extrabold text-xs uppercase tracking-widest py-2.5 px-4 rounded-xl border border-transparent transition-all duration-300 flex items-center justify-center gap-2 shadow-xs cursor-pointer"
+                                  >
+                                    <span>Explore {city.name}</span>
+                                    <FiArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                  </button>
+                                </div>
+
+                          </div>
+                ))}
+                        </div>
+                        ) : (
+                        <div className="bg-white rounded-2xl border border-[#e8ded3] p-12 text-center max-w-md mx-auto shadow-sm my-6">
+                          <div className="w-14 h-14 mx-auto rounded-full bg-[#f4ede3] flex items-center justify-center text-[#c5a880] mb-3">
+                            <FiSearch size={24} />
+                          </div>
+                          <h4 className="text-lg font-bold text-[#1f1916] mb-1">No Cities Found</h4>
+                          <p className="text-xs text-gray-500 mb-4">
+                            We couldn't find any city matching "{searchQuery}".
+                          </p>
+                          <button
+                            type="button"
+                            onClick={clearAllFilters}
+                            className="bg-[#1f1916] hover:bg-[#c5a880] text-white hover:text-[#1a1412] px-5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer"
+                          >
+                            Show All {currentState.name} Cities
+                          </button>
+                        </div>
+            )}
+                      </div>
+        )}
+
+                      {/* ── 7. VIEW TAB 2: LIVE PROPERTIES IN STATE & CITY ── */}
+                      {activeTab === 'properties' && (
+                        <div>
+                          <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                            <div>
+                              <h3 className="text-base sm:text-lg font-black text-[#1f1916]">
+                                {selectedCityFilter
+                                  ? `Curated Properties in ${selectedCityFilter}, ${currentState.name}`
+                                  : `All Luxury Properties in ${currentState.name}`}
+                              </h3>
+                              <p className="text-xs text-[#6e6259]">
+                                Verified builder residences with direct concierge assistance.
+                              </p>
+                            </div>
+
+                            <span className="text-xs font-semibold text-[#8c6d46] bg-white px-3 py-1 rounded-lg border border-[#e8ded3]">
+                              Showing {filteredProperties.length} Properties
+                            </span>
+                          </div>
+
+                          {filteredProperties.length > 0 ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                              {filteredProperties.map((prop) => (
+                                <div
+                                  key={prop.id}
+                                  onClick={() => setSelectedItemModal(prop)}
+                                  className="group bg-white rounded-2xl overflow-hidden border border-[#e8ded3] hover:border-[#c5a880] transition-all duration-300 shadow-sm hover:shadow-2xl hover:shadow-[#c5a880]/20 flex flex-col justify-between cursor-pointer transform hover:-translate-y-1.5"
+                                >
+                                  {/* Property Image */}
+                                  <div className="relative h-52 w-full overflow-hidden bg-gray-100">
+                                    <img
+                                      src={prop.image}
+                                      alt={prop.name}
+                                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                      loading="lazy"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                                    {/* Top Badges */}
+                                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+                                      <span className="px-2.5 py-1 rounded-full bg-[#1f1916]/80 backdrop-blur-md text-[#c5a880] text-[10px] font-black uppercase tracking-wider border border-[#c5a880]/30">
+                                        {prop.bhk}
+                                      </span>
+
+                                      <span className="px-2 py-0.5 rounded-md bg-green-900/90 backdrop-blur-sm text-green-200 text-[10px] font-bold uppercase tracking-wider border border-green-500/30">
+                                        {prop.status}
+                                      </span>
+                                    </div>
+
+                                    {/* Bottom Info on Image */}
+                                    <div className="absolute bottom-3 left-3.5 right-3.5">
+                                      <h4 className="text-xl font-black text-white tracking-tight drop-shadow-md group-hover:text-[#c5a880] transition-colors">
+                                        {prop.name}
+                                      </h4>
+                                      <p className="text-[11px] text-gray-200 font-medium flex items-center gap-1 mt-0.5">
+                                        <FiMapPin size={11} className="text-[#c5a880]" />
+                                        <span>{prop.locality}, {prop.city}</span>
+                                      </p>
+                                    </div>
+                                  </div>
+
+                                  {/* Property Details Body */}
+                                  <div className="p-4 flex-1 flex flex-col justify-between bg-white">
+
+                                    <div className="mb-4">
+                                      <div className="text-xs font-semibold text-[#52463e] mb-2">
+                                        {prop.type}
+                                      </div>
+
+                                      {/* Price & Location Tag */}
+                                      <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#f8f6f2] border border-[#eee6dc]">
+                                        <div>
+                                          <span className="text-[9px] uppercase tracking-wider text-[#9c8e82] font-bold block">
+                                            Investment Price
+                                          </span>
+                                          <span className="text-sm font-extrabold text-[#1f1916]">
+                                            {prop.price}
+                                          </span>
+                                        </div>
+
+                                        <div className="text-right">
+                                          <span className="text-[9px] uppercase tracking-wider text-[#9c8e82] font-bold block">
+                                            Type
+                                          </span>
+                                          <span className="text-xs font-bold text-[#8c6d46]">
+                                            {prop.propertyType}
+                                          </span>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    {/* Action Button */}
+                                    <button
+                                      type="button"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedItemModal(prop);
+                                      }}
+                                      className="w-full bg-[#1f1916] hover:bg-[#c5a880] text-white hover:text-[#1a1412] font-bold text-xs uppercase tracking-wider py-2.5 px-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+                                    >
+                                      <FiCalendar size={13} />
+                                      <span>Book Site Visit &amp; Brochure</span>
+                                    </button>
+
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="bg-white rounded-2xl border border-[#e8ded3] p-12 text-center max-w-md mx-auto shadow-sm my-6">
+                              <div className="w-14 h-14 mx-auto rounded-full bg-[#f4ede3] flex items-center justify-center text-[#c5a880] mb-3">
+                                <FiSearch size={24} />
+                              </div>
+                              <h4 className="text-lg font-bold text-[#1f1916] mb-1">No Properties Found</h4>
+                              <p className="text-xs text-gray-500 mb-4">
+                                No properties matched your current criteria in {currentState.name}.
+                              </p>
+                              <button
+                                type="button"
+                                onClick={clearAllFilters}
+                                className="bg-[#1f1916] hover:bg-[#c5a880] text-white hover:text-[#1a1412] px-5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer"
+                              >
+                                Clear Filters &amp; View All
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                    </div>
+
+      {/* ── 8. Luxury Property / City Consultation Modal ── */ }
+      { selectedItemModal && (
+                      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
+                        <div
+                          className="bg-white rounded-3xl overflow-hidden border border-[#c5a880]/40 max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl relative"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          {/* Modal Header with Image */}
+                          <div className="relative h-48 sm:h-56 w-full shrink-0">
+                            <img
+                              src={selectedItemModal.image}
+                              alt={selectedItemModal.name}
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#1f1916] via-[#1f1916]/60 to-black/30" />
+
+                            {/* Close Button */}
+                            <button
+                              type="button"
+                              onClick={() => setSelectedItemModal(null)}
+                              className="absolute top-4 right-4 bg-black/60 hover:bg-black text-white p-2 rounded-full backdrop-blur-md transition-colors cursor-pointer border border-white/20"
+                            >
+                              <FiX size={16} />
+                            </button>
+
+                            {/* Title on Banner */}
+                            <div className="absolute bottom-4 left-5 right-5">
+                              <span className="px-2.5 py-0.5 rounded-full bg-[#c5a880] text-[#1f1916] text-[10px] font-black uppercase tracking-wider mb-1.5 inline-block">
+                                {selectedItemModal.bhk || selectedItemModal.tag || 'Luxury Development'}
+                              </span>
+                              <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                                {selectedItemModal.name}
+                              </h3>
+                              <p className="text-xs text-gray-200 font-medium flex items-center gap-1 mt-0.5">
+                                <FiMapPin size={11} className="text-[#c5a880]" />
+                                <span>
+                                  {selectedItemModal.locality ? `${selectedItemModal.locality}, ${selectedItemModal.city}, ` : ''}
+                                  {currentState.name}
+                                </span>
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Modal Scrollable Content */}
+                          <div className="p-6 overflow-y-auto space-y-5">
+
+                            {/* Key Specs Strip */}
+                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3 rounded-xl bg-[#f8f6f2] border border-[#eee6dc]">
+                              <div>
+                                <span className="text-[9px] uppercase tracking-wider text-[#9c8e82] font-bold block">Investment</span>
+                                <span className="text-sm font-black text-[#1f1916]">
+                                  {selectedItemModal.price || selectedItemModal.avgPrice || 'Price on Request'}
+                                </span>
+                              </div>
+                              <div>
+                                <span className="text-[9px] uppercase tracking-wider text-[#9c8e82] font-bold block">Configuration</span>
+                                <span className="text-xs font-bold text-[#8c6d46]">
+                                  {selectedItemModal.bhk || selectedItemModal.propertiesCount || 'Signature Residences'}
+                                </span>
+                              </div>
+                              <div className="col-span-2 sm:col-span-1">
+                                <span className="text-[9px] uppercase tracking-wider text-[#9c8e82] font-bold block">Status</span>
+                                <span className="text-xs font-bold text-green-700">
+                                  {selectedItemModal.status || 'Verified Listing'}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Instant Inquiry / Site Visit Form */}
+                            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#1f1916] to-[#2c2420] text-white border border-[#c5a880]/30">
+                              <div className="flex items-center justify-between mb-3">
+                                <div>
+                                  <h5 className="text-sm font-black text-white">
+                                    Book Private Site Visit &amp; Official Brochure
+                                  </h5>
+                                  <p className="text-[11px] text-gray-300">
+                                    Connect directly with NSS Senior Investment Director in {currentState.name}
+                                  </p>
+                                </div>
+                                <span className="hidden sm:inline-block px-2.5 py-1 rounded-full bg-[#c5a880]/20 border border-[#c5a880]/40 text-[#c5a880] text-[10px] font-bold uppercase">
+                                  VIP Concierge
+                                </span>
+                              </div>
+
+                              {inquirySuccess ? (
+                                <div className="p-4 rounded-xl bg-[#c5a880]/20 border border-[#c5a880] text-center text-[#f8f6f2] flex items-center justify-center gap-2">
+                                  <FiCheckCircle size={18} className="text-[#c5a880]" />
+                                  <span className="text-xs font-bold">
+                                    Thank you! Your private consultation request has been confirmed. Our director will call you shortly.
+                                  </span>
+                                </div>
+                              ) : (
+                                <form onSubmit={handleInquirySubmit} className="space-y-2.5">
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                    <input
+                                      type="text"
+                                      required
+                                      placeholder="Your Full Name"
+                                      value={inquiryForm.name}
+                                      onChange={(e) => setInquiryForm({ ...inquiryForm, name: e.target.value })}
+                                      className="bg-white/10 border border-white/20 focus:border-[#c5a880] rounded-xl px-3 py-2 text-xs text-white placeholder-gray-400 outline-none"
+                                    />
+                                    <input
+                                      type="tel"
+                                      required
+                                      placeholder="Phone Number (e.g. 9876543210)"
+                                      value={inquiryForm.phone}
+                                      onChange={(e) => setInquiryForm({ ...inquiryForm, phone: e.target.value })}
+                                      className="bg-white/10 border border-white/20 focus:border-[#c5a880] rounded-xl px-3 py-2 text-xs text-white placeholder-gray-400 outline-none"
+                                    />
+                                  </div>
+
+                                  <button
+                                    type="submit"
+                                    className="w-full bg-gradient-to-r from-[#b89563] via-[#c5a880] to-[#b89563] hover:brightness-110 text-[#1a1412] font-black text-xs uppercase tracking-wider py-2.5 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                                  >
+                                    <FiPhone size={13} />
+                                    <span>Request VIP Site Visit for {selectedItemModal.name}</span>
+                                  </button>
+                                </form>
+                              )}
+                            </div>
+
+                          </div>
+
+                        </div>
+                      </div>
+                    )}
+
+                </div>
+                );
 };
 
-export default CityCardsView;
+                export default CityCardsView;
